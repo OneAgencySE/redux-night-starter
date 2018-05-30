@@ -29,7 +29,6 @@ ModalPortal.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]),
-  ref: PropTypes.func,
 };
 
 export default ModalPortal;

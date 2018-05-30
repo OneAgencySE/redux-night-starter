@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import createDebugger from 'debug';
 
 import './App.css';
 
@@ -8,6 +9,8 @@ import Cart from './Cart';
 import ProductGrid from './ProductGrid';
 import Modal from './Modal';
 import Thumbnail from './Thumbnail';
+
+const debug = createDebugger('recat:app');
 
 const setProductsByIdState = productsByIdState => state => ({
   productsById: Object.assign({}, state.productsById, productsByIdState),
@@ -60,9 +63,12 @@ class App extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.clickOutsideCart, true);
     document.addEventListener('click', this.clickOutsideModal, true);
-    axios.get('/api/products').then(({ data }) => {
-      this.setState(setProductsByIdState(indexProductsById(data)));
-    });
+    axios
+      .get('/api/products')
+      .then(({ data }) => {
+        this.setState(setProductsByIdState(indexProductsById(data)));
+      })
+      .catch(error => debug(error));
   }
 
   componentWillUnmount() {
@@ -92,34 +98,53 @@ class App extends React.Component {
       cartItem => cartItem.id === id,
     );
     if (existingCartItem) {
-      axios.put(`/api/cart-items/${id}`, { quantity }).then(({ data }) => {
-        this.setState(setCartState({ items: mapCartItems(this.state, data) }));
-      });
+      axios
+        .put(`/api/cart-items/${id}`, { quantity })
+        .then(({ data }) => {
+          this.setState(
+            setCartState({ items: mapCartItems(this.state, data) }),
+          );
+        })
+        .catch(error => debug(error));
     } else {
-      axios.post(`/api/cart-items/${id}`, { quantity }).then(({ data }) => {
-        this.setState(setCartState({ items: mapCartItems(this.state, data) }));
-      });
+      axios
+        .post(`/api/cart-items/${id}`, { quantity })
+        .then(({ data }) => {
+          this.setState(
+            setCartState({ items: mapCartItems(this.state, data) }),
+          );
+        })
+        .catch(error => debug(error));
     }
   }
 
   removeCartItem(id) {
-    axios.delete(`/api/cart-items/${id}`).then(({ data }) => {
-      this.setState(setCartState({ items: mapCartItems(this.state, data) }));
-    });
+    axios
+      .delete(`/api/cart-items/${id}`)
+      .then(({ data }) => {
+        this.setState(setCartState({ items: mapCartItems(this.state, data) }));
+      })
+      .catch(error => debug(error));
   }
 
   clearCart() {
-    axios.delete(`/api/cart-items`).then(({ data }) => {
-      this.setState(setCartState({ items: mapCartItems(this.state, data) }));
-    });
+    axios
+      .delete(`/api/cart-items`)
+      .then(({ data }) => {
+        this.setState(setCartState({ items: mapCartItems(this.state, data) }));
+      })
+      .catch(error => debug(error));
   }
 
   checkout() {
-    axios.delete(`/api/cart-items`).then(({ data }) => {
-      this.setState(setCartState({ items: mapCartItems(this.state, data) }));
-      this.closeCart();
-      this.setState({ showModal: true });
-    });
+    axios
+      .delete(`/api/cart-items`)
+      .then(({ data }) => {
+        this.setState(setCartState({ items: mapCartItems(this.state, data) }));
+        this.closeCart();
+        this.setState({ showModal: true });
+      })
+      .catch(error => debug(error));
   }
 
   clickOutsideModal({ target }) {
