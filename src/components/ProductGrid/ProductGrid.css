@@ -1,0 +1,15 @@
+.ProductGrid__product {
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .ProductGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  .ProductGrid__product {
+    margin-bottom: 0;
+  }
+}

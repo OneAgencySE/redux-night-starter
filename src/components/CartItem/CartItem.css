@@ -1,0 +1,41 @@
+.CartItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  column-gap: 16px;
+  grid-template-areas:
+    "name name name name"
+    "image priceLabel quantityLabel removeButton"
+    "image price quantity removeButton";
+}
+
+.CartItem__name {
+  grid-area: name;
+}
+
+.CartItem__image {
+  grid-area: image;
+}
+
+.CartItem__priceLabel {
+  grid-area: priceLabel;
+}
+
+.CartItem__price {
+  grid-area: price;
+}
+
+.CartItem__quantityLabel {
+  grid-area: quantityLabel;
+}
+
+.CartItem__quantity {
+  grid-area: quantity;
+}
+
+.CartItem__removeButton {
+  grid-area: removeButton;
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}

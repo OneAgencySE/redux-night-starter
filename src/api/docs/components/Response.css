@@ -1,0 +1,27 @@
+.response {
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid lightgray;
+}
+
+.response__header {
+    display: flex;
+    border-bottom: 1px solid lightgray;
+}
+
+.response__title {
+  flex-grow: 1;
+  padding: 10px;
+  margin: 0;
+}
+
+.response__clear-button {
+  flex-grow: 0;
+  padding: 0 20px;
+  background: lightgrey;
+  cursor: pointer;
+}
+
+.response__json {
+  padding: 10px;
+}

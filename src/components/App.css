@@ -1,0 +1,8 @@
+.App {
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+
+.App__productGrid {
+  margin: 0 20px 20px 20px;
+}

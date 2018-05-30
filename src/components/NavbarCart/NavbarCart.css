@@ -1,0 +1,22 @@
+.NavbarCart {
+  position: relative;
+}
+
+.NavbarCart__button {
+  background-color: #000;
+  padding: 10px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.NavbarCart__icon {
+  font-size: 36px;
+  transition: all 0.3s ease 0s;
+}
+
+.NavbarCart:hover .NavbarCart__icon {
+  color: #61DAFB;
+}
+

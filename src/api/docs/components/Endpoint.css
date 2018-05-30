@@ -1,0 +1,29 @@
+.endpoint {
+  display: flex;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+
+.endpoint__method {
+  padding: 10px;
+  background: lightblue;
+}
+
+.endpoint__url {
+  flex-grow: 1;
+  padding: 10px;
+}
+
+.endpoint__payload {
+  flex-grow: 0;
+  padding: 10px;
+}
+
+.endpoint__test-button {
+  flex-grow: 0;
+  background: lightgrey;
+  padding: 0 20px;
+  cursor: pointer;
+}

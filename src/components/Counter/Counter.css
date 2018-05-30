@@ -1,0 +1,34 @@
+.Counter {
+  display: flex;
+  align-content: center;
+}
+
+.Counter__button {
+  background-color: #F7F7F7;
+  border: 1px solid #ECECEC;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 18px;  
+  transition: all 0.3s ease 0s;
+}
+
+.Counter__button--decrease {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.Counter__button--increase {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.Counter__button:hover {
+  background-color: #ECECEC; 
+}
+
+.Counter__value {
+  padding: 5px 20px;
+  border-top: 1px solid #ECECEC;
+  border-bottom: 1px solid #ECECEC;
+}

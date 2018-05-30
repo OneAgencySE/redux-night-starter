@@ -1,0 +1,81 @@
+.Thumbnail {
+  margin: 0;
+}
+
+.Thumbnail__image {
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.Thumbnail--width-fill .Thumbnail__image {
+  width: 100%;
+}
+.Thumbnail--width-xs .Thumbnail__image {
+  width: 16px;
+}
+.Thumbnail--width-s .Thumbnail__image {
+  width: 24px;
+}
+.Thumbnail--width-m .Thumbnail__image {
+  width: 32px;
+}
+.Thumbnail--width-l .Thumbnail__image {
+  width: 48px;
+}
+.Thumbnail--width-xl .Thumbnail__image {
+  width: 64px;
+}
+.Thumbnail--width-xxl .Thumbnail__image {
+  width: 128px;
+}
+.Thumbnail--width-xxxl .Thumbnail__image {
+  width: 256px;
+}
+
+.Thumbnail--height-fill .Thumbnail__image {
+  height: 100%;
+}
+.Thumbnail--height-xs .Thumbnail__image {
+  height: 16px;
+}
+.Thumbnail--height-s .Thumbnail__image {
+  height: 24px;
+}
+.Thumbnail--height-m .Thumbnail__image {
+  height: 32px;
+}
+.Thumbnail--height-l .Thumbnail__image {
+  height: 48px;
+}
+.Thumbnail--height-xl .Thumbnail__image {
+  height: 64px;
+}
+.Thumbnail--height-xxl .Thumbnail__image {
+  height: 128px;
+}
+.Thumbnail--height-xxxl .Thumbnail__image {
+  height: 256px;
+}
+
+.Thumbnail--top .Thumbnail__image {
+  object-position: top;
+}
+.Thumbnail--right .Thumbnail__image {
+  object-position: right;
+}
+.Thumbnail--bottom .Thumbnail__image {
+  object-position: bottom;
+}
+.Thumbnail--left .Thumbnail__image {
+  object-position: left;
+}
+.Thumbnail--center .Thumbnail__image {
+  object-position: center;
+}
+
+.Thumbnail__caption {
+  background-color: #20232A;
+  color: #61DAFB;
+  text-align: center;
+  padding: 16px;
+}
