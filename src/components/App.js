@@ -183,7 +183,7 @@ class App extends React.Component {
           title="Thank you!"
           open={this.state.showModal}
           onClose={this.closeModal}
-          ref={node => (this.modalElement = node)}
+          modalRef={node => (this.modalElement = node)}
         >
           <Thumbnail
             url="http://thecatapi.com/api/images/get?format=src&type=gif"

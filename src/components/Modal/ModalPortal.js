@@ -20,15 +20,25 @@ class ModalPortal extends React.Component {
   }
 
   render() {
-    return ReactDOM.createPortal(<Modal {...this.props} />, this.element);
+    const { open, title, onClose, children, modalRef } = this.props;
+    return ReactDOM.createPortal(
+      <Modal open={open} title={title} onClose={onClose} ref={modalRef}>
+        {children}
+      </Modal>,
+      this.element,
+    );
   }
 }
 
 ModalPortal.propTypes = {
+  open: PropTypes.bool,
+  title: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]),
+  modalRef: PropTypes.func,
 };
 
 export default ModalPortal;
