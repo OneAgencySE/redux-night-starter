@@ -4,11 +4,11 @@ import createDebugger from 'debug';
 
 import './App.css';
 
-import Navbar from './Navbar';
-import Cart from './Cart';
-import ProductGrid from './ProductGrid';
-import Modal from './Modal';
-import Thumbnail from './Thumbnail';
+import Navbar from '../Navbar';
+import Cart from '../Cart';
+import ProductGrid from '../ProductGrid';
+import Modal from '../Modal';
+import Thumbnail from '../Thumbnail';
 
 const debug = createDebugger('recat:app');
 
