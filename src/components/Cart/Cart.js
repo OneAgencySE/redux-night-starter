@@ -8,19 +8,11 @@ import Button from '../Button';
 import CartItem from '../CartItem';
 import Price from '../Price';
 
-const calculateSubtotal = items =>
-  items.reduce(
-    (previousSubtotal, currentItem) => ({
-      quantity: previousSubtotal.quantity + currentItem.quantity,
-      amount:
-        previousSubtotal.amount + currentItem.quantity * currentItem.price,
-    }),
-    { quantity: 0, amount: 0 },
-  );
-
 const Cart = React.forwardRef(
-  ({ className, active, items, onRemoveItem, onClear, onCheckout }, ref) => {
-    const subtotal = calculateSubtotal(items);
+  (
+    { className, active, items, subtotal, onRemoveItem, onClear, onCheckout },
+    ref,
+  ) => {
     const hasItems = items.length > 0;
     return (
       <div
@@ -78,6 +70,10 @@ Cart.propTypes = {
       price: PropTypes.number.isRequired,
     }),
   ),
+  subtotal: PropTypes.shape({
+    quantity: PropTypes.number,
+    amount: PropTypes.number,
+  }),
   onRemoveItem: PropTypes.func.isRequired,
   onClear: PropTypes.func.isRequired,
   onCheckout: PropTypes.func.isRequired,

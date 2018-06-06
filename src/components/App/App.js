@@ -9,11 +9,12 @@ import Cart from '../Cart';
 import ProductGrid from '../ProductGrid';
 import Modal from '../Modal';
 import Thumbnail from '../Thumbnail';
+import Notification from '../Notification';
 
 const debug = createDebugger('recat:app');
 
-const setProductsByIdState = productsByIdState => state => ({
-  productsById: Object.assign({}, state.productsById, productsByIdState),
+const setProductsState = productsState => state => ({
+  products: Object.assign({}, state.products, productsState),
 });
 
 const setCartState = cartState => state => ({
@@ -28,20 +29,34 @@ const indexProductsById = products =>
   );
 
 const mapCartItems = (state, items) =>
-  items.map(item => Object.assign({}, item, state.productsById[item.id]));
+  items.map(item => Object.assign({}, item, state.products.byId[item.id]));
 
 const clickedOutside = (element, target) =>
   !element || !element.contains(target);
+
+const calculateSubtotal = items =>
+  items.reduce(
+    (previousSubtotal, currentItem) => ({
+      quantity: previousSubtotal.quantity + currentItem.quantity,
+      amount:
+        previousSubtotal.amount + currentItem.quantity * currentItem.price,
+    }),
+    { quantity: 0, amount: 0 },
+  );
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      notification: null,
       cart: {
         active: false,
         items: [],
       },
-      productsById: {},
+      products: {
+        loading: false,
+        byId: {},
+      },
       showModal: false,
     };
 
@@ -63,12 +78,28 @@ class App extends React.Component {
   componentDidMount() {
     document.addEventListener('click', this.clickOutsideCart, true);
     document.addEventListener('click', this.clickOutsideModal, true);
+    this.setState(setProductsState({ loading: true }));
+    this.setState({ notification: null });
     axios
       .get('/api/products')
-      .then(({ data }) => {
-        this.setState(setProductsByIdState(indexProductsById(data)));
+      .then(response => {
+        this.setState(
+          setProductsState({
+            byId: indexProductsById(response.data),
+            loading: false,
+          }),
+        );
       })
-      .catch(error => debug(error));
+      .catch(error => {
+        this.setState({
+          notification: { type: 'error', message: error.message },
+        });
+        this.setState(
+          setProductsState({
+            loading: false,
+          }),
+        );
+      });
   }
 
   componentWillUnmount() {
@@ -97,6 +128,7 @@ class App extends React.Component {
     const existingCartItem = this.state.cart.items.find(
       cartItem => cartItem.id === id,
     );
+    this.setState({ notification: null });
     if (existingCartItem) {
       axios
         .put(`/api/cart-items/${id}`, { quantity })
@@ -105,7 +137,11 @@ class App extends React.Component {
             setCartState({ items: mapCartItems(this.state, data) }),
           );
         })
-        .catch(error => debug(error));
+        .catch(error => {
+          this.setState({
+            notification: { type: 'error', message: error.message },
+          });
+        });
     } else {
       axios
         .post(`/api/cart-items/${id}`, { quantity })
@@ -114,29 +150,46 @@ class App extends React.Component {
             setCartState({ items: mapCartItems(this.state, data) }),
           );
         })
-        .catch(error => debug(error));
+        .catch(error => {
+          this.setState({
+            notification: { type: 'error', message: error.message },
+          });
+        });
     }
   }
 
   removeCartItem(id) {
+    this.setState({ notification: null });
     axios
       .delete(`/api/cart-items/${id}`)
       .then(({ data }) => {
         this.setState(setCartState({ items: mapCartItems(this.state, data) }));
       })
-      .catch(error => debug(error));
+      .catch(error => {
+        this.setState(setCartState({ active: false }));
+        this.setState({
+          notification: { type: 'error', message: error.message },
+        });
+      });
   }
 
   clearCart() {
+    this.setState({ notification: null });
     axios
       .delete(`/api/cart-items`)
       .then(({ data }) => {
         this.setState(setCartState({ items: mapCartItems(this.state, data) }));
       })
-      .catch(error => debug(error));
+      .catch(error => {
+        this.setState(setCartState({ active: false }));
+        this.setState({
+          notification: { type: 'error', message: error.message },
+        });
+      });
   }
 
   checkout() {
+    this.setState({ notification: null });
     axios
       .delete(`/api/cart-items`)
       .then(({ data }) => {
@@ -144,7 +197,12 @@ class App extends React.Component {
         this.closeCart();
         this.setState({ showModal: true });
       })
-      .catch(error => debug(error));
+      .catch(error => {
+        this.setState(setCartState({ active: false }));
+        this.setState({
+          notification: { type: 'error', message: error.message },
+        });
+      });
   }
 
   clickOutsideModal({ target }) {
@@ -158,27 +216,42 @@ class App extends React.Component {
   }
 
   render() {
-    const products = Object.values(this.state.productsById);
+    const products = Object.values(this.state.products.byId);
+    const subtotal = calculateSubtotal(this.state.cart.items);
     return (
       <div className="App">
         <Navbar
           className="App__navbar"
+          cartSubtotal={subtotal}
+          activeCart={this.state.cart.active}
           onClickCart={this.toggleCart}
           ref={node => (this.navbarCartElement = node)}
         />
         <Cart
           active={this.state.cart.active}
           items={this.state.cart.items}
+          subtotal={subtotal}
           onRemoveItem={this.removeCartItem}
           onClear={this.clearCart}
           onCheckout={this.checkout}
           ref={node => (this.cartElement = node)}
         />
-        <ProductGrid
-          className="App__productGrid"
-          products={products}
-          onAddToCart={this.addToCart}
-        />
+        <main className="App__main">
+          {this.state.notification && (
+            <Notification
+              className="App__notification"
+              type={this.state.notification.type}
+            >
+              {this.state.notification.message}
+            </Notification>
+          )}
+          <ProductGrid
+            className="App__productGrid"
+            products={products}
+            loading={this.state.products.loading}
+            onAddToCart={this.addToCart}
+          />
+        </main>
         <Modal
           title="Thank you!"
           open={this.state.showModal}

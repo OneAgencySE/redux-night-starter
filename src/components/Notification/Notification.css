@@ -1,0 +1,36 @@
+.Notification {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.Notification__icon {
+  margin-right: 10px;
+}
+
+.Notification--info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.Notification--success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.Notification--warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.Notification--error {
+  color: #721c24;
+  background-color: #f5c6cb;
+  border-color: #f5c6cb ;
+}

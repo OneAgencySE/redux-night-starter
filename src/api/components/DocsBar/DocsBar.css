@@ -1,0 +1,114 @@
+.DocsBar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.DocsBar__bar {
+  background-color: #61dafb;
+  height: 60px;
+  padding: 0 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.DocsBar__section {
+  display: flex;
+  align-items: center;
+}
+
+.DocsBar__link {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.DocsBar__link:hover {
+  text-decoration: underline;
+}
+
+.DocsBar__settingsButton {
+  background-color: #20232a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+.DocsBar__settingsButton:hover,
+.DocsBar__settingsButton--active {
+  background-color: #fff;
+  color: #20232a;
+}
+
+.DocsBar__settingsButton--active:hover {
+  background-color: #20232a;
+  color: #fff;
+}
+
+.DocsBar__settings {
+  background-color: #20232a;
+  padding: 20px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.DocsBar__form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 1em;
+  row-gap: 1em;
+  margin: 0 auto;
+}
+
+.DocsBar__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.DocsBar__fieldsetLegend {
+  margin-bottom: 10px;
+}
+
+.DocsBar__field {
+  margin-bottom: 2px;
+}
+
+.DocsBar__fieldLabel {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.DocsBar__fieldInput {
+  padding: 10px;
+}
+
+.DocsBar__formButton {
+  border-radius: 4px;
+  padding: 10px;
+  cursor: pointer;  
+  background-color: #f7f7f7;
+  border: 1px solid #ececec;
+}
+
+.DocsBar__formButton:hover {
+  background-color: #ECECEC; 
+}
+
+.DocsBar__formButton--primary {
+  background-color: #61dafb;
+  border-color: #59c7e5;
+}
+
+.DocsBar__formButton--primary:hover {
+  background-color: #59C7E5;
+}
+
