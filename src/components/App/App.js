@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import createDebugger from 'debug';
 
 import './App.css';
 
@@ -10,8 +9,6 @@ import ProductGrid from '../ProductGrid';
 import Modal from '../Modal';
 import Thumbnail from '../Thumbnail';
 import Notification from '../Notification';
-
-const debug = createDebugger('recat:app');
 
 const setProductsState = productsState => state => ({
   products: Object.assign({}, state.products, productsState),
