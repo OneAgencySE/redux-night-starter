@@ -5,7 +5,6 @@ import classnames from 'classnames';
 import Thumbnail from '../Thumbnail';
 import Price from '../Price';
 import Counter from '../Counter';
-import Button from '../Button';
 
 import './Product.css';
 
@@ -17,7 +16,6 @@ class Product extends React.Component {
     };
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
-    this.addToCart = this.addToCart.bind(this);
   }
 
   decreaseQuantity() {
@@ -32,13 +30,6 @@ class Product extends React.Component {
     this.setState({
       quantity: this.state.quantity + 1,
     });
-  }
-
-  addToCart() {
-    const { product, onAddToCart } = this.props;
-    const { quantity } = this.state;
-    onAddToCart({ id: product.id, quantity });
-    this.setState({ quantity: 1 });
   }
 
   render() {
@@ -59,13 +50,6 @@ class Product extends React.Component {
           onDecrease={this.decreaseQuantity}
           onIncrease={this.increaseQuantity}
         />
-        <Button
-          className="Product__addToCartButton"
-          color="primary"
-          onClick={this.addToCart}
-        >
-          Add to cart
-        </Button>
       </div>
     );
   }
@@ -82,7 +66,6 @@ Product.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
   }).isRequired,
-  onAddToCart: PropTypes.func.isRequired,
 };
 
 export default Product;
