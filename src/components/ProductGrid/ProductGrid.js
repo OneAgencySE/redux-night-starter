@@ -7,7 +7,7 @@ import Spinner from '../Spinner';
 
 import './ProductGrid.css';
 
-const ProductGrid = ({ className, products, loading, onAddToCart }) => {
+const ProductGrid = ({ className, products, loading }) => {
   if (loading) {
     return <Spinner className="ProductGrid__spinner" size="xxl" />;
   }
@@ -21,7 +21,6 @@ const ProductGrid = ({ className, products, loading, onAddToCart }) => {
           className="ProductGrid__product"
           key={product.id}
           product={product}
-          onAddToCart={onAddToCart}
         />
       ))}
     </div>
@@ -45,7 +44,6 @@ ProductGrid.propTypes = {
     type: PropTypes.oneOf(['info', 'success', 'warning', 'error']).isRequired,
     message: PropTypes.string.isRequired,
   }),
-  onAddToCart: PropTypes.func.isRequired,
 };
 
 export default ProductGrid;
