@@ -11,4 +11,4 @@ One Agency Redux Night starter project
 For a better developer experience you can install [React DevTools](https://github.com/facebook/react-devtools) extension which let you inspect the React component tree in Chrome and Firefox. 
 
 ### Redux DevTools
-Use [Redux DevTolls](https://github.com/reduxjs/redux-devtools) for in-app display of state and time-travel debugging.
+Use [Redux DevTools Extension](https://github.com/zalmoxisus/redux-devtools-extension) for in-app display of state and time-travel debugging.
