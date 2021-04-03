@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import './DocsBar.css';
 import localStorageUtil from '../../utils/localStorageUtil';
 
-const setSettingState = settingsState => state => ({
+const setSettingState = (settingsState) => (state) => ({
   settings: Object.assign({}, state.settings, settingsState),
 });
 
@@ -43,7 +43,7 @@ class DocsBar extends React.Component {
   }
 
   handleSubmit() {
-    Object.keys(this.state.settings).forEach(name => {
+    Object.keys(this.state.settings).forEach((name) => {
       localStorage.setItem(name, this.state.settings[name]);
     });
   }

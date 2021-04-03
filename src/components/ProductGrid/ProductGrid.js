@@ -16,7 +16,7 @@ const ProductGrid = ({ className, products, loading, onAddToCart }) => {
   }
   return (
     <div className={classnames('ProductGrid', className)}>
-      {products.map(product => (
+      {products.map((product) => (
         <Product
           className="ProductGrid__product"
           key={product.id}

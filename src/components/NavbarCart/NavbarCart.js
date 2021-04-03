@@ -29,6 +29,8 @@ const NavbarCart = React.forwardRef(
   ),
 );
 
+NavbarCart.displayName = 'NavbarCart';
+
 NavbarCart.propTypes = {
   className: PropTypes.string,
   subtotal: PropTypes.shape({

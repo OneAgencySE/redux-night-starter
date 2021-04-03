@@ -8,7 +8,7 @@ import localStorageUtil from './utils/localStorageUtil';
 
 const debug = createDebugger('recat:api');
 
-const parseIdFromUrl = url =>
+const parseIdFromUrl = (url) =>
   parseInt(url.substring(url.lastIndexOf('/') + 1), 10);
 
 const settings = localStorageUtil.getSettings();

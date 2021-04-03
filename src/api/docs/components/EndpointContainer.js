@@ -19,12 +19,12 @@ class EndpointContainer extends React.Component {
       url,
       data: payload,
     })
-      .then(response =>
+      .then((response) =>
         this.setState({
           response,
         }),
       )
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           response: error.response,
         });

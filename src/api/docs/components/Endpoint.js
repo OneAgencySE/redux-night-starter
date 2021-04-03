@@ -30,4 +30,3 @@ Endpoint.propTypes = {
 };
 
 export default Endpoint;
- 

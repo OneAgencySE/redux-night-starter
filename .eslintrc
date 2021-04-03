@@ -1,9 +1,8 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "extends": [
     "eslint:recommended",
-    "prettier",
-    "prettier/react",
+    "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
   "plugins": ["prettier"],
@@ -12,13 +11,12 @@
     "jest": true,
     "es6": true
   },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "singleQuote": true,
-        "trailingComma": "all"
-      }
-    ]
+    "prettier/prettier": "error"
   }
 }

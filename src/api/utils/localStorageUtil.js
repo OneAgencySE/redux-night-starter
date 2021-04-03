@@ -1,5 +1,6 @@
-export const getBoolean = itemName => localStorage.getItem(itemName) === 'true';
-export const getNumber = itemName => {
+export const getBoolean = (itemName) =>
+  localStorage.getItem(itemName) === 'true';
+export const getNumber = (itemName) => {
   const parsedValue = Number.parseInt(localStorage.getItem(itemName), 10);
   return isNaN(parsedValue) ? 0 : parsedValue;
 };
