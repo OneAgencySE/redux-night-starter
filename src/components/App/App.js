@@ -10,15 +10,15 @@ import Modal from '../Modal';
 import Thumbnail from '../Thumbnail';
 import Notification from '../Notification';
 
-const setProductsState = productsState => state => ({
+const setProductsState = (productsState) => (state) => ({
   products: Object.assign({}, state.products, productsState),
 });
 
-const setCartState = cartState => state => ({
+const setCartState = (cartState) => (state) => ({
   cart: Object.assign({}, state.cart, cartState),
 });
 
-const indexProductsById = products =>
+const indexProductsById = (products) =>
   products.reduce(
     (previous, current) =>
       Object.assign({}, previous, { [current.id]: current }),
@@ -26,12 +26,12 @@ const indexProductsById = products =>
   );
 
 const mapCartItems = (state, items) =>
-  items.map(item => Object.assign({}, item, state.products.byId[item.id]));
+  items.map((item) => Object.assign({}, item, state.products.byId[item.id]));
 
 const clickedOutside = (element, target) =>
   !element || !element.contains(target);
 
-const calculateSubtotal = items =>
+const calculateSubtotal = (items) =>
   items.reduce(
     (previousSubtotal, currentItem) => ({
       quantity: previousSubtotal.quantity + currentItem.quantity,
@@ -79,7 +79,7 @@ class App extends React.Component {
     this.setState({ notification: null });
     axios
       .get('/api/products')
-      .then(response => {
+      .then((response) => {
         this.setState(
           setProductsState({
             byId: indexProductsById(response.data),
@@ -87,7 +87,7 @@ class App extends React.Component {
           }),
         );
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState({
           notification: { type: 'error', message: error.message },
         });
@@ -123,7 +123,7 @@ class App extends React.Component {
 
   addToCart({ id, quantity }) {
     const existingCartItem = this.state.cart.items.find(
-      cartItem => cartItem.id === id,
+      (cartItem) => cartItem.id === id,
     );
     this.setState({ notification: null });
     if (existingCartItem) {
@@ -134,7 +134,7 @@ class App extends React.Component {
             setCartState({ items: mapCartItems(this.state, data) }),
           );
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({
             notification: { type: 'error', message: error.message },
           });
@@ -147,7 +147,7 @@ class App extends React.Component {
             setCartState({ items: mapCartItems(this.state, data) }),
           );
         })
-        .catch(error => {
+        .catch((error) => {
           this.setState({
             notification: { type: 'error', message: error.message },
           });
@@ -162,7 +162,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState(setCartState({ items: mapCartItems(this.state, data) }));
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState(setCartState({ active: false }));
         this.setState({
           notification: { type: 'error', message: error.message },
@@ -177,7 +177,7 @@ class App extends React.Component {
       .then(({ data }) => {
         this.setState(setCartState({ items: mapCartItems(this.state, data) }));
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState(setCartState({ active: false }));
         this.setState({
           notification: { type: 'error', message: error.message },
@@ -194,7 +194,7 @@ class App extends React.Component {
         this.closeCart();
         this.setState({ showModal: true });
       })
-      .catch(error => {
+      .catch((error) => {
         this.setState(setCartState({ active: false }));
         this.setState({
           notification: { type: 'error', message: error.message },
@@ -222,7 +222,7 @@ class App extends React.Component {
           cartSubtotal={subtotal}
           activeCart={this.state.cart.active}
           onClickCart={this.toggleCart}
-          ref={node => (this.navbarCartElement = node)}
+          ref={(node) => (this.navbarCartElement = node)}
         />
         <Cart
           active={this.state.cart.active}
@@ -231,7 +231,7 @@ class App extends React.Component {
           onRemoveItem={this.removeCartItem}
           onClear={this.clearCart}
           onCheckout={this.checkout}
-          ref={node => (this.cartElement = node)}
+          ref={(node) => (this.cartElement = node)}
         />
         <main className="App__main">
           {this.state.notification && (
@@ -253,7 +253,7 @@ class App extends React.Component {
           title="Thank you!"
           open={this.state.showModal}
           onClose={this.closeModal}
-          modalRef={node => (this.modalElement = node)}
+          modalRef={(node) => (this.modalElement = node)}
         >
           <Thumbnail
             url="http://thecatapi.com/api/images/get?format=src&type=gif"

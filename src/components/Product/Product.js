@@ -74,6 +74,7 @@ class Product extends React.Component {
 Product.propTypes = {
   className: PropTypes.string,
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     image: PropTypes.shape({
       url: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,

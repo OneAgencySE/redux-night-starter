@@ -22,7 +22,7 @@ const Cart = React.forwardRef(
         <div className="Cart__items">
           {!hasItems && <span>Your cart is empty!</span>}
           {hasItems &&
-            items.map(item => (
+            items.map((item) => (
               <CartItem
                 className="Cart__item"
                 key={item.id}
@@ -54,6 +54,8 @@ const Cart = React.forwardRef(
     );
   },
 );
+
+Cart.displayName = 'Cart';
 
 Cart.propTypes = {
   className: PropTypes.string,

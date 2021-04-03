@@ -41,8 +41,8 @@ export const getAll = () => {
   return products.slice();
 };
 
-export const getById = id => {
-  const product = products.find(product => product.id === id);
+export const getById = (id) => {
+  const product = products.find((product) => product.id === id);
   if (!product) {
     return null;
   }
